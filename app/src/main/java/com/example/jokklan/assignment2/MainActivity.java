@@ -11,10 +11,11 @@ import android.view.View;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
-    public final static String EXTRA_ANSWER = "com.example.jokklan.assignment2.ANSWER";
+    public final static String EXTRA_COUNT = "com.example.jokklan.assignment2.COUNT";
     public final static String EXTRA_TIME = "com.example.jokklan.assignment2.TIME";
     private final static Random random = new Random();
-    private static int time;
+    private static int time = 0;
+    private static int answerCount = 0;
 
 
     @Override
@@ -32,28 +33,30 @@ public class MainActivity extends AppCompatActivity {
         alertDialogBuilder.setPositiveButton("Ja", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                endTest("ja");
+                endTest();
             }
         });
 
         alertDialogBuilder.setNegativeButton("Nej", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                endTest("nej");
+                dialog.dismiss();
             }
         });
 
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-        time = random.nextInt(3000);
+        time = time + random.nextInt(1000);
+        answerCount = answerCount + 1;
 
         SystemClock.sleep(time);
         alertDialog.show();
     }
 
-    public void endTest(String result) {
+
+    public void endTest() {
         Intent intent = new Intent(this, EndTestActivity.class);
-        intent.putExtra(EXTRA_ANSWER, result);
+        intent.putExtra(EXTRA_COUNT, answerCount);
         intent.putExtra(EXTRA_TIME, time);
         startActivity(intent);
     }

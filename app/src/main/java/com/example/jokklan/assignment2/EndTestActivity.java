@@ -18,7 +18,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 
 public class EndTestActivity extends AppCompatActivity {
-    private static String answer;
+    private static int answerCount;
     private static int time;
 
 
@@ -28,7 +28,7 @@ public class EndTestActivity extends AppCompatActivity {
         setContentView(R.layout.activity_end_test);
 
         Intent intent = getIntent();
-        this.answer = intent.getStringExtra(MainActivity.EXTRA_ANSWER);
+        this.answerCount = intent.getIntExtra(MainActivity.EXTRA_COUNT, 0);
         this.time = intent.getIntExtra(MainActivity.EXTRA_TIME, 0);
     }
 
@@ -50,7 +50,7 @@ public class EndTestActivity extends AppCompatActivity {
 
         body.put("assignment", "2");
         body.put("name", name);
-        body.put("answer", answer);
+        body.put("count", Integer.toString(answerCount));
         body.put("time", Integer.toString(time));
 
         JSONObject json = new JSONObject(body);
