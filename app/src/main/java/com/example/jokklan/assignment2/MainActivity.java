@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-        currentTime = currentTime + random.nextInt(1000);
+        currentTime = currentTime + random.nextInt(500);
         timeEntries.add(Integer.toString(currentTime));
         answerCount = answerCount + 1;
 
