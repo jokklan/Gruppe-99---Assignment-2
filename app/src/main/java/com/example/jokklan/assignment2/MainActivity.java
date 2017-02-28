@@ -8,13 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     public final static String EXTRA_COUNT = "com.example.jokklan.assignment2.COUNT";
-    public final static String EXTRA_TIME = "com.example.jokklan.assignment2.TIME";
+    public final static String EXTRA_TIME_ENTRIES = "com.example.jokklan.assignment2.TIME_ENTRIES";
     private final static Random random = new Random();
-    private static int time = 0;
+    private static int currentTime = 0;
+    private static ArrayList<String> timeEntries = new ArrayList<String>();
     private static int answerCount = 0;
 
 
@@ -46,10 +48,11 @@ public class MainActivity extends AppCompatActivity {
 
         AlertDialog alertDialog = alertDialogBuilder.create();
 
-        time = time + random.nextInt(1000);
+        currentTime = currentTime + random.nextInt(1000);
+        timeEntries.add(Integer.toString(currentTime));
         answerCount = answerCount + 1;
 
-        SystemClock.sleep(time);
+        SystemClock.sleep(currentTime);
         alertDialog.show();
     }
 
@@ -57,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void endTest() {
         Intent intent = new Intent(this, EndTestActivity.class);
         intent.putExtra(EXTRA_COUNT, answerCount);
-        intent.putExtra(EXTRA_TIME, time);
+        intent.putExtra(EXTRA_TIME_ENTRIES, timeEntries);
         startActivity(intent);
     }
 }

@@ -15,11 +15,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class EndTestActivity extends AppCompatActivity {
     private static int answerCount;
-    private static int time;
+    private static ArrayList<String> timeEntries;
 
 
     @Override
@@ -29,7 +30,7 @@ public class EndTestActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         this.answerCount = intent.getIntExtra(MainActivity.EXTRA_COUNT, 0);
-        this.time = intent.getIntExtra(MainActivity.EXTRA_TIME, 0);
+        this.timeEntries = intent.getStringArrayListExtra(MainActivity.EXTRA_TIME_ENTRIES);
     }
 
     public void sendResult(View button) {
@@ -51,7 +52,9 @@ public class EndTestActivity extends AppCompatActivity {
         body.put("assignment", "2");
         body.put("name", name);
         body.put("count", Integer.toString(answerCount));
-        body.put("time", Integer.toString(time));
+        for (int i = 0; i < timeEntries.size(); i++) {
+            body.put(Integer.toString(i), timeEntries.get(i));
+        }
 
         JSONObject json = new JSONObject(body);
 
