@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Assignment2</string>
+    <string name="yes">Ja</string>
+    <string name="no">Nej</string>
+    <string name="dialog_question">Tog det for lang tid med denne besked?</string>
+    <string name="send_result">Send the test results</string>
+    <string name="empty" />
+</resources>
